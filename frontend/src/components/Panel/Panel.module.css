@@ -1,0 +1,7 @@
+.Panel__button {
+    display: flex;
+}
+
+.Panel__button > *:not(:last-child) {
+    margin-right: 8px;
+}

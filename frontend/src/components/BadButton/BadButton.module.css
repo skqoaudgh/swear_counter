@@ -1,0 +1,55 @@
+.BadButton {
+    display: block;
+    background-color: rgba(200, 50, 0, 1);
+    width: 75px;
+    height: 50px;
+    border: 2px dotted rgba(255, 255, 255, 1);
+    border-radius: 10px;
+    overflow: hidden;
+    transition: all 0.5s;
+}
+
+.BadButton:hover {
+    width: 50px;
+    background-color: rgba(255, 255, 255, 1);
+    border: 2px dotted rgba(200, 50, 0, 1);
+    transform: rotate(90deg);
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.BadButton__content {
+    display: block;
+    position: relative;
+    width: 75px;
+    height: 50px;
+    font-family: arial;
+    color: rgba(255, 255, 255, 1);
+    font-weight: bold;
+    font-size: 16px;
+    line-height: 45px;
+    white-space: none;
+    top: 2px;
+    left: 0px;
+    transition: all 0.5s;
+}
+
+.BadButton:hover .BadButton__content {
+    left: -103px;
+    transition: all 0.5s;
+}
+
+.BadButton:active .BadButton__content:after {
+    content: ':o';
+}
+
+.BadButton__content:after {
+    position: absolute;
+    width: 75px;
+    height: 50px;
+    top: -3px;
+    left: 90px;
+    content: ':(';
+    font-size: 45px;
+    color: rgba(200, 50, 0, 1);
+}

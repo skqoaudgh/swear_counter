@@ -1,0 +1,10 @@
+.ResetButton {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: transparent;
+    color: white;
+    width: 37px;
+    height: 37px;
+    padding: 8px;
+}
