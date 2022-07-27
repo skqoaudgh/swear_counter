@@ -4,7 +4,7 @@ import _throttle from 'lodash/throttle';
 import GoodButton from '../GoodButton';
 import BadButton from '../BadButton';
 
-import getCount from '../../apis/getCount';
+import getTotalCount from '../../apis/getTotalCount';
 import updateCount from '../../apis/updateCount';
 const update = _throttle(updateCount, 2000);
 
@@ -25,7 +25,7 @@ const Panel = ({ name }) => {
     };
 
     useEffect(() => {
-        getCount(name).then(({ data }) => {
+        getTotalCount(name).then(({ data }) => {
             const today = new Date();
             const todayData = data.find((count) => {
                 const date = new Date(count.date);

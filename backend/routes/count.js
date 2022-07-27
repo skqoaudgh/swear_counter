@@ -13,8 +13,9 @@ router.get('/', (req, res) => {
 
 router.get('/:name', (req, res) => {
     const { name } = req.params;
+    const { type } = req.query;
 
-    Count.findByName(name)
+    Count.findByName(name, { type })
         .then((counts) => {
             res.send(counts);
         })

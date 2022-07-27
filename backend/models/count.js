@@ -12,16 +12,19 @@ countSchema.statics.create = function (payload) {
 };
 
 countSchema.statics.updateByName = function (name, payload) {
-  return this.findOneAndUpdate({ name }, payload, { new: true, upsert: true });
+    return this.findOneAndUpdate({ name }, payload, { new: true, upsert: true });
 };
 
-countSchema.statics.findByName = function (name) {
-  return this.find({ name });
+countSchema.statics.findByName = function (name, { type = 'all' } = {}) {
+    if(type === 'today') {
+        const date = new Date(new Date().toDateString());
+        return this.find({ name, date: { $gte: date } });
+    }
+    return this.find({ name });
 };
 
 countSchema.statics.findAll = function () {
-  return this.find({});
+    return this.find({});
 };
-
 
 export default mongoose.model('count', countSchema);
