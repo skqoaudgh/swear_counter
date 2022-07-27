@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite --host",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview --host"
   },
   "dependencies": {
     "axios": "^0.27.2",
@@ -15,7 +15,8 @@
     "lodash": "^4.17.21",
     "mongoose": "^6.4.7",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "vite-plugin-favicon": "^1.0.8"
   },
   "devDependencies": {
     "@types/react": "^18.0.15",

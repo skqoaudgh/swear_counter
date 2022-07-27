@@ -6,6 +6,18 @@ import countRouter from './routes/count.js';
 
 const app = express();
 
+const whitelist = ['https://swear-count.run.goorm.io', 'https://swear-count-preview.run.goorm.io'];
+const corsOptions = {
+    origin: function (origin, callback) {
+        if (whitelist.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
+    credentials: true,
+};
+
 mongoose.Promise = global.Promise;
 
 mongoose
@@ -13,7 +25,7 @@ mongoose
     .then(() => console.log('Successfully connected to mongodb'))
     .catch((e) => console.error(e));
 
-app.use(cors({ origin: 'https://swear-count.run.goorm.io', credentials: true }));
+app.use(cors(corsOptions));
 app.use(express.json());
 express.urlencoded({ extended: false });
 app.use('/count', countRouter);
