@@ -6,7 +6,7 @@ import countRouter from './routes/count.js';
 
 const app = express();
 
-const whitelist = ['https://swear-count.run.goorm.io', 'https://swear-count-preview.run.goorm.io'];
+const whitelist = ['https://swear-counter.run.goorm.io', 'https://swear-counter-dev.run.goorm.io'];
 const corsOptions = {
     origin: function (origin, callback) {
         if (whitelist.indexOf(origin) !== -1) {
