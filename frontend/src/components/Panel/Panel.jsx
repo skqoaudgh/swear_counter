@@ -43,7 +43,7 @@ const Panel = ({ name }) => {
 
     return (
         <div>
-            <h1>{name}</h1>
+            <h1 className={styles.Panel__title}>{name}</h1>
             <h2>{count * COUNT_UNIT}￦</h2>
             <div className={styles.Panel__button}>
                 <BadButton onClick={decrease}>-1</BadButton>

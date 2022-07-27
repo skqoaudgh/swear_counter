@@ -1,7 +1,17 @@
+.Panel__title {
+    font-size: 4rem;
+}
+
 .Panel__button {
     display: flex;
 }
 
 .Panel__button > *:not(:last-child) {
     margin-right: 8px;
+}
+
+@media (max-width: 768px) {
+    .Panel__title {
+       	font-size: 2.5rem;
+    }
 }

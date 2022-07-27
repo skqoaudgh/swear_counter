@@ -12,7 +12,9 @@ countSchema.statics.create = function (payload) {
 };
 
 countSchema.statics.updateByName = function (name, payload) {
-    return this.findOneAndUpdate({ name }, payload, { new: true, upsert: true });
+    const date = new Date(new Date().toDateString());
+    
+    return this.findOneAndUpdate({ name, date: { $gte: date } }, payload, { new: true, upsert: true });
 };
 
 countSchema.statics.findByName = function (name, { type = 'all' } = {}) {
