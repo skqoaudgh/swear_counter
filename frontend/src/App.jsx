@@ -1,13 +1,19 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 
-import Panel from './components/Panel';
+import Header from './components/Header';
+import Home from './components/Home';
+import Chart from './components/Chart';
 
-function App() {    
+import PAGE from './constants/page';
+
+function App() {
+    const [page, setPage] = useState(PAGE.HOME);
+
     return (
         <div className="App">
-            <Panel name="유라" />
-            <Panel name="명호" />
+            <Header page={page} setPage={setPage} />
+            {page === PAGE.HOME ? <Home /> : <Chart />}
         </div>
     );
 }

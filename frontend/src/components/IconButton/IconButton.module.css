@@ -1,0 +1,9 @@
+.IconButton > svg {
+    width: 24px;
+    height: 24px;
+    color: white;
+}
+
+.IconButton--active {
+    box-shadow: 0 0 0 2px inset grey;
+}

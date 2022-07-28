@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import { ViteFaviconsPlugin } from 'vite-plugin-favicon';
+import svgr from 'vite-plugin-svgr'
 
 export default defineConfig({
     plugins: [
@@ -17,7 +18,9 @@ export default defineConfig({
                 path: 'assets/',
             },
         }),
+        svgr(),
     ],
+    assetsInclude: ['**/*.svg'],
     root: 'frontend',
     build: {
         rollupOptions: {
