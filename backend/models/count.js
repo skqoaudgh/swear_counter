@@ -29,8 +29,16 @@ countSchema.statics.findByName = function (name, { type = 'all' } = {}) {
     return this.find({ name });
 };
 
-countSchema.statics.findAll = function () {
-    return this.find({});
+countSchema.statics.findAll = function ({ type = 'all' }) {
+    if (type === 'week') {
+        const today = new Date();
+        const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
+        const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
+
+        return this.find({ $and: [{ date: { $gte: firstDay } }, { date: { $lte: lastDay } }] });
+    }
+
+    return this.find({}).sort({ date: 1 });
 };
 
 export default mongoose.model('count', countSchema);

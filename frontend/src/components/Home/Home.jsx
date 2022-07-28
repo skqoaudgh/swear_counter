@@ -1,10 +1,14 @@
 import Panel from '../Panel';
 
+import USER from '../../constants/user';
+
+import styles from './Home.module.css';
+
 const Home = () => {
     return (
-        <div>
-            <Panel name="유라" />
-            <Panel name="명호" />
+        <div className={styles.Home}>
+            <Panel name={USER.YURA} />
+            <Panel name={USER.MYUNGHO} />
         </div>
     );
 };

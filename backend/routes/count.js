@@ -4,7 +4,9 @@ import Count from '../models/count.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    Count.findAll()
+    const { type } = req.query;
+
+    Count.findAll({ type })
         .then((counts) => {
             res.send(counts);
         })
@@ -25,7 +27,7 @@ router.get('/:name', (req, res) => {
 router.post('/:name', (req, res) => {
     const { name } = req.params;
     const { count } = req.body;
-    
+
     const payload = {
         name,
         count,
