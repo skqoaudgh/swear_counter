@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 
 const countSchema = new mongoose.Schema({
-    name: { type: String, required: true, unique: true },
+    name: { type: String, required: true },
     count: { type: Number, required: true },
     date: { type: Date, required: true },
 });
@@ -13,12 +13,16 @@ countSchema.statics.create = function (payload) {
 
 countSchema.statics.updateByName = function (name, payload) {
     const date = new Date(new Date().toDateString());
-    
-    return this.findOneAndUpdate({ name, date: { $gte: date } }, payload, { new: true, upsert: true });
+
+    return this.findOneAndUpdate(
+        { name, date: { $gte: date } },
+        { $set: payload },
+        { new: true, upsert: true }
+    );
 };
 
 countSchema.statics.findByName = function (name, { type = 'all' } = {}) {
-    if(type === 'today') {
+    if (type === 'today') {
         const date = new Date(new Date().toDateString());
         return this.find({ name, date: { $gte: date } });
     }
