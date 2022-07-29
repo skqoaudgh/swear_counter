@@ -9,13 +9,15 @@
     transition: all 0.5s;
 }
 
-.GoodButton:hover:focus-visible {
-    width: 50px;
-    background-color: rgba(255, 255, 255, 1);
-    border: 2px dotted rgba(10, 180, 200, 1);
-    transform: rotate(-90deg);
-    cursor: pointer;
-    transition: all 0.5s;
+@media (min-width: 769px) {
+    .GoodButton:hover {
+        width: 50px;
+        background-color: rgba(255, 255, 255, 1);
+        border: 2px dotted rgba(10, 180, 200, 1);
+        transform: rotate(-90deg);
+        cursor: pointer;
+        transition: all 0.5s;
+    }
 }
 
 .GoodButton__content {
@@ -34,9 +36,11 @@
     transition: all 0.5s;
 }
 
-.GoodButton:hover:focus-visible .GoodButton__content {
-    left: -103px;
-    transition: all 0.5s;
+@media (min-width: 769px) {
+    .GoodButton:hover .GoodButton__content {
+        left: -103px;
+        transition: all 0.5s;
+    }
 }
 
 .GoodButton__content:after {
@@ -60,7 +64,7 @@
     .GoodButton {
         width: 50px;
     }
-    
+
     .GoodButton__content {
         width: 50px;
     }

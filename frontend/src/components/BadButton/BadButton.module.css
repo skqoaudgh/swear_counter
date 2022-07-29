@@ -9,13 +9,15 @@
     transition: all 0.5s;
 }
 
-.BadButton:hover:focus-visible {
-    width: 50px;
-    background-color: rgba(255, 255, 255, 1);
-    border: 2px dotted rgba(200, 50, 0, 1);
-    transform: rotate(90deg);
-    cursor: pointer;
-    transition: all 0.5s;
+@media (min-width: 769px) {
+    .BadButton:hover {
+        width: 50px;
+        background-color: rgba(255, 255, 255, 1);
+        border: 2px dotted rgba(200, 50, 0, 1);
+        transform: rotate(90deg);
+        cursor: pointer;
+        transition: all 0.5s;
+    }
 }
 
 .BadButton__content {
@@ -34,9 +36,11 @@
     transition: all 0.5s;
 }
 
-.BadButton:hover:focus-visible .BadButton__content {
-    left: -103px;
-    transition: all 0.5s;
+@media (min-width: 769px) {
+    .BadButton:hover .BadButton__content {
+        left: -103px;
+        transition: all 0.5s;
+    }
 }
 
 .BadButton:active .BadButton__content:after {
@@ -58,7 +62,7 @@
     .BadButton {
         width: 50px;
     }
-    
+
     .BadButton__content {
         width: 50px;
     }
