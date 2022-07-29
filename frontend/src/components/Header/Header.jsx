@@ -1,7 +1,7 @@
 import IconButton from '../IconButton';
 
-import { ReactComponent as ChartIcon } from '../../../public/chart.svg';
-import { ReactComponent as HomeIcon } from '../../../public/home.svg';
+import { ReactComponent as ChartIcon } from '../../assets/chart.svg';
+import { ReactComponent as HomeIcon } from '../../assets/home.svg';
 
 import PAGE from '../../constants/page';
 

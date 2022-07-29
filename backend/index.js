@@ -9,7 +9,7 @@ const app = express();
 const whitelist = ['https://swear-counter.run.goorm.io', 'https://swear-counter-dev.run.goorm.io'];
 const corsOptions = {
     origin: function (origin, callback) {
-        if (whitelist.indexOf(origin) !== -1) {
+        if (!whitelist.includes(origin)) {
             callback(null, true);
         } else {
             callback(new Error('Not allowed by CORS'));

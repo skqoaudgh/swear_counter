@@ -16,6 +16,14 @@
     user-select: none;
 }
 
+html,
+body {
+    overflow: hidden;
+}
+body {
+    position: relative;
+}
+
 body {
     margin: 0;
     display: flex;

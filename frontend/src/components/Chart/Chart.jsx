@@ -20,6 +20,7 @@ ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, T
 
 const options = {
     responsive: true,
+    aspectRatio: 1,
     plugins: {
         legend: {
             position: 'bottom',
