@@ -1,0 +1,7 @@
+.HorizontalDragContainer {
+    cursor: grab;
+}
+
+.HorizontalDragContainer--clicking {
+    cursor: grabbing;
+}

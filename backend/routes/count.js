@@ -19,7 +19,6 @@ router.get('/:name', (req, res) => {
 
     Count.findByName(name, { type })
         .then((counts) => {
-        console.log(counts);
         	if(type === 'sum') {
                 const sum = counts.reduce((acc, cur) => acc + cur.count, 0);
                 

@@ -6,21 +6,17 @@
 
 .Chart__buttons {
     position: absolute;
-    top: 216px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    max-width: 600px;
-    width: 100%;
-}
-
-.Chart__buttons > div {
+    top: 16px;
     display: flex;
     align-items: center;
+    justify-content: flex-start !important;
+    width: calc(100% - 64px);
+    padding-left: 32px;
+    padding-right: 32px;
 }
 
-.Chart__buttons > div > *:not(:last-child) {
-    margin-right: 8px;
+.Chart__buttons > *:not(:last-child) {
+	margin-right: 8px;    
 }
 
 .Chart__button {
@@ -29,10 +25,10 @@
     align-items: center;
     width: 48px;
     height: 36px;
-    padding: 0;
+    padding: 4px 0;
 }
 
 .Chart__button > svg {
-    width: 16px;
-    height: 16px;
+    width: 20px;
+    height: 20px;
 }
