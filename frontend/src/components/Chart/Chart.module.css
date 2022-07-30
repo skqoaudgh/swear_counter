@@ -3,3 +3,36 @@
     padding-left: 32px;
     padding-right: 32px;
 }
+
+.Chart__buttons {
+    position: absolute;
+    top: 216px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 600px;
+    width: 100%;
+}
+
+.Chart__buttons > div {
+    display: flex;
+    align-items: center;
+}
+
+.Chart__buttons > div > *:not(:last-child) {
+    margin-right: 8px;
+}
+
+.Chart__button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 48px;
+    height: 36px;
+    padding: 0;
+}
+
+.Chart__button > svg {
+    width: 16px;
+    height: 16px;
+}

@@ -11,6 +11,10 @@ import {
 } from 'chart.js';
 import { Line } from 'react-chartjs-2';
 
+import { ReactComponent as LeftChevronIcon } from '../../assets/chevron-left.svg';
+import { ReactComponent as RightChevronIcon } from '../../assets/chevron-right.svg';
+import { ReactComponent as CircleIcon } from '../../assets/circle.svg';
+import IconButton from '../IconButton';
 import getWeekCount from '../../apis/getWeekCount';
 import USER from '../../constants/user';
 
@@ -51,6 +55,7 @@ const options = {
             },
         },
         y: {
+            beginAtZero: true,
             grid: {
                 drawBorder: false,
                 color: '#555',
@@ -68,6 +73,9 @@ const options = {
 };
 
 const Chart = () => {
+    const today = new Date();
+
+    const [date, setDate] = useState(today);
     const [chartData, setChartData] = useState(null);
 
     useEffect(() => {
@@ -90,26 +98,70 @@ const Chart = () => {
         };
 
         getWeekCount().then(({ data }) => {
-            const today = new Date();
-            const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
+            const firstDay = new Date(date.setDate(date.getDate() - date.getDay()));
             initialChartData.labels = Array(7)
                 .fill()
-                .map((_, index) => firstDay.getDate() + index);
+                .map((_, index) =>
+                    new Date(firstDay.setDate(firstDay.getDate() + index)).getDate()
+                );
 
             Object.values(USER).forEach((name) => {
                 const current = data.filter((d) => d.name === name);
                 const target = initialChartData.datasets.find((data) => data.label === name);
+
                 current.forEach((d2) => {
-                    const index = new Date(d2.date).getDate() - today.getDate();
-                    target.data[index] = d2.count;
+                    const current = new Date(d2.date);
+
+                    if (
+                        current.getFullYear() === date.getFullYear() &&
+                        current.getMonth() === date.getMonth()
+                    ) {
+                        const index = current.getDate() - date.getDate();
+                        target.data[index] = d2.count;
+                    }
                 });
             });
 
             setChartData(initialChartData);
         });
-    }, []);
+    }, [date]);
 
-    return <div className={styles.Chart}>{chartData && <Line options={options} data={chartData} />}</div>;
+    const onClickPrev = () => {
+        const prevWeek = new Date(date.setDate(date.getDate() - 7));
+
+        setDate(prevWeek);
+    };
+
+    const onClickNext = () => {
+        const prevWeek = new Date(date.setDate(date.getDate() + 7));
+
+        setDate(prevWeek);
+    };
+
+    const onClickToday = () => {
+        setDate(today);
+    };
+
+    return (
+        <div className={styles.Chart}>
+            <div className={styles.Chart__buttons}>
+                <div>
+                    <IconButton className={styles.Chart__button} onClick={onClickPrev}>
+                        <LeftChevronIcon />
+                    </IconButton>
+                    <IconButton className={styles.Chart__button} onClick={onClickNext}>
+                        <RightChevronIcon />
+                    </IconButton>
+                </div>
+                <div>
+                    <IconButton className={styles.Chart__button} onClick={onClickToday}>
+                        <CircleIcon />
+                    </IconButton>
+                </div>
+            </div>
+            {chartData && <Line options={options} data={chartData} />}
+        </div>
+    );
 };
 
 export default Chart;

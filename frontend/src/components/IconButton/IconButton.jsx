@@ -2,13 +2,13 @@ import cx from 'classnames';
 
 import styles from './IconButton.module.css';
 
-const IconButton = ({ children, onClick, active }) => {
-    const className = cx(styles.IconButton, {
+const IconButton = ({ children, className, onClick, active }) => {
+    const classNames = cx(styles.IconButton, className, {
         [styles['IconButton--active']]: active,
     });
-    
+
     return (
-        <button className={className} onClick={onClick}>
+        <button className={classNames} onClick={onClick}>
             {children}
         </button>
     );
