@@ -102,7 +102,7 @@ const Chart = () => {
             initialChartData.labels = Array(7)
                 .fill()
                 .map((_, index) =>
-                    new Date(firstDay.setDate(firstDay.getDate() + index)).getDate()
+                    new Date(firstDay.setDate(firstDay.getDate() + 1)).getDate()
                 );
 
             Object.values(USER).forEach((name) => {
