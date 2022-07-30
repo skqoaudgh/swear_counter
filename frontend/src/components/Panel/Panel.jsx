@@ -28,11 +28,7 @@ const Panel = ({ name }) => {
 
     useEffect(() => {
         getTotalCount(name).then(({ data }) => {
-            const sum = data.reduce((acc, cur) => {
-                return acc + cur.count;
-            }, 0);
-
-            setCount(sum);
+            setCount(data.result);
         });
     }, []);
 

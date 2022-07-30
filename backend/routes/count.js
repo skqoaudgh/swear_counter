@@ -19,7 +19,14 @@ router.get('/:name', (req, res) => {
 
     Count.findByName(name, { type })
         .then((counts) => {
-            res.send(counts);
+        console.log(counts);
+        	if(type === 'sum') {
+                const sum = counts.reduce((acc, cur) => acc + cur.count, 0);
+                
+                res.send({ result: sum });
+            } else {
+                res.send({ result: counts });
+            }
         })
         .catch((err) => res.status(500).send(err));
 });
