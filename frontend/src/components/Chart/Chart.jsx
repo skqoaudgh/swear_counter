@@ -149,6 +149,7 @@ const Chart = () => {
                     <IconButton className={styles.Chart__button} onClick={onClickPrev}>
                         <LeftChevronIcon />
                     </IconButton>
+                    <span>{date.getMonth() + 1}월</span>
                     <IconButton className={styles.Chart__button} onClick={onClickNext}>
                         <RightChevronIcon />
                     </IconButton>
