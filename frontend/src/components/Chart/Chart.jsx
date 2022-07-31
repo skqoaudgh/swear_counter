@@ -98,7 +98,7 @@ const Chart = () => {
             ],
         };
 
-        getWeekCount().then(({ data }) => {
+        getWeekCount(date).then(({ data }) => {
             const firstDay = new Date(date.setDate(date.getDate() - date.getDay()));
             initialChartData.labels = Array(7)
                 .fill()
@@ -120,7 +120,7 @@ const Chart = () => {
                     }
                 });
             });
-
+            
             setChartData(initialChartData);
         });
     }, [date]);

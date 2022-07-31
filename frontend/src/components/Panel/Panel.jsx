@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import _throttle from 'lodash/throttle';
 
 import GoodButton from '../GoodButton';
 import BadButton from '../BadButton';
 
 import getTotalCount from '../../apis/getTotalCount';
 import updateCount from '../../apis/updateCount';
-const update = _throttle(updateCount, 2000);
 
 import { numberWithCommas } from '../../utils/number';
 
@@ -19,11 +17,11 @@ const Panel = ({ name }) => {
 
     const increase = () => {
         setCount(count + 1);
-        update(name, count + 1);
+        updateCount(name, 1);
     };
     const decrease = () => {
         setCount(count - 1);
-        update(name, count - 1);
+        updateCount(name, -1);
     };
 
     useEffect(() => {

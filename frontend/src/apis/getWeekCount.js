@@ -2,10 +2,10 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://swear-count-api.run.goorm.io';
 
-const getTodayCount = async (name) => {
-    const res = await axios.get(`/count?type=week`);
+const getWeekCount = async (date) => {
+    const res = await axios.get(`/count?type=week&date=${date}`);
     
     return res;
 };
 
-export default getTodayCount;
+export default getWeekCount;

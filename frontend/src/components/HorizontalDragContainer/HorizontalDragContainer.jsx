@@ -36,7 +36,9 @@ const HorizontalDragContainer = ({ children, className, callback }) => {
     return (
         <div
             className={classNames}
-
+            onMouseDown={onMouseDown}
+            onMouseUp={onMouseUp}
+            onMouseMove={onMouseMove}
             onTouchStart={onMouseDown}
             onTouchEnd={onMouseUp}
             onTouchMove={onMouseMove}

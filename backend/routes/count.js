@@ -4,9 +4,9 @@ import Count from '../models/count.js';
 const router = express.Router();
 
 router.get('/', (req, res) => {
-    const { type } = req.query;
+    const { type, date } = req.query;
 
-    Count.findAll({ type })
+    Count.findAll({ type, date })
         .then((counts) => {
             res.send(counts);
         })

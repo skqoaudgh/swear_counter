@@ -13,10 +13,10 @@ countSchema.statics.create = function (payload) {
 
 countSchema.statics.updateByName = function (name, payload) {
     const date = new Date(new Date().toDateString());
-
+    
     return this.findOneAndUpdate(
         { name, date: { $gte: date } },
-        { $set: payload },
+        { $inc: { count: payload.count } },
         { new: true, upsert: true }
     );
 };
@@ -29,12 +29,12 @@ countSchema.statics.findByName = function (name, { type = 'all' } = {}) {
     return this.find({ name });
 };
 
-countSchema.statics.findAll = function ({ type = 'all' }) {
+countSchema.statics.findAll = function ({ type = 'all', date }) {
     if (type === 'week') {
-        const today = new Date();
-        const firstDay = new Date(today.setDate(today.getDate() - today.getDay()));
-        const lastDay = new Date(today.setDate(today.getDate() - today.getDay() + 6));
-
+        const current = new Date(date);
+        const firstDay = new Date(current.setDate(current.getDate() - current.getDay()));
+        const lastDay = new Date(current.setDate(current.getDate() - current.getDay() + 6));
+        
         return this.find({ $and: [{ date: { $gte: firstDay } }, { date: { $lte: lastDay } }] });
     }
 
