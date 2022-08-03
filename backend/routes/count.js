@@ -37,7 +37,6 @@ router.post('/:name', (req, res) => {
     const payload = {
         name,
         count,
-        date: new Date(),
     };
 
     Count.updateByName(name, payload)

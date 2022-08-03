@@ -16,7 +16,7 @@ import { ReactComponent as CircleIcon } from '../../assets/circle.svg';
 import IconButton from '../IconButton';
 import HorizontalDragContainer from '../HorizontalDragContainer';
 
-import getWeekCount from '../../apis/getWeekCount';
+import getAccumulateCount from '../../apis/getAccumulateCount';
 import USER from '../../constants/user';
 
 import styles from './Chart.module.css';
@@ -98,29 +98,26 @@ const Chart = () => {
             ],
         };
 
-        getWeekCount(date).then(({ data }) => {
+        getAccumulateCount(date).then(({ data }) => {
             const firstDay = new Date(date.setDate(date.getDate() - date.getDay()));
             initialChartData.labels = Array(7)
                 .fill()
-                .map((_, index) => new Date(firstDay.setDate(firstDay.getDate() + 1)).getDate());
+                .map((_, index) => {
+                    const currentDate = new Date(firstDay);
+                    return new Date(currentDate.setDate(firstDay.getDate() + index)).getDate();
+                });
 
             Object.values(USER).forEach((name) => {
-                const current = data.filter((d) => d.name === name);
+                const current = data[name];
                 const target = initialChartData.datasets.find((data) => data.label === name);
 
-                current.forEach((d2) => {
-                    const current = new Date(d2.date);
+                initialChartData.labels.forEach((dateLabel, index) => {
+                    let count = current?.[dateLabel] || 0;
 
-                    if (
-                        current.getFullYear() === date.getFullYear() &&
-                        current.getMonth() === date.getMonth()
-                    ) {
-                        const index = current.getDate() - date.getDate();
-                        target.data[index] = d2.count;
-                    }
+                    target.data[index] = count || 0;
                 });
             });
-            
+
             setChartData(initialChartData);
         });
     }, [date]);
