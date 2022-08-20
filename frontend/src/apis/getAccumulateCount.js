@@ -2,9 +2,10 @@ import axios from 'axios';
 
 axios.defaults.baseURL = 'https://swear-count-api.run.goorm.io';
 
-const getAccumulateCount = async (date) => {
-    const res = await axios.get(`/count?type=accumulate&date=${date}`);
-    
+const getAccumulateCount = async ({ name, date }) => {
+    const dateString = date.toISOString();
+    const res = await axios.get(`/count/${name}?type=accumulate&date=${dateString}`);
+
     return res;
 };
 

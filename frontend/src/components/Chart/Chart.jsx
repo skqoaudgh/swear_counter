@@ -80,8 +80,19 @@ const Chart = () => {
     const [chartData, setChartData] = useState(null);
 
     useEffect(() => {
+        const DateOfFirstDay = new Date(date);
+        DateOfFirstDay.setDate(DateOfFirstDay.getDate() - DateOfFirstDay.getDay());
+        const labels = Array(7)
+            .fill()
+            .map((_, index) => {
+                const currentDate = new Date(DateOfFirstDay);
+                currentDate.setDate(currentDate.getDate() + index);
+
+                return currentDate.getDate();
+            });
+
         const initialChartData = {
-            labels: null,
+            labels,
             datasets: [
                 {
                     label: USER.YURA,
@@ -98,26 +109,16 @@ const Chart = () => {
             ],
         };
 
-        getAccumulateCount(date).then(({ data }) => {
-            const firstDay = new Date(date.setDate(date.getDate() - date.getDay()));
-            initialChartData.labels = Array(7)
-                .fill()
-                .map((_, index) => {
-                    const currentDate = new Date(firstDay);
-                    return new Date(currentDate.setDate(firstDay.getDate() + index)).getDate();
-                });
-
-            Object.values(USER).forEach((name) => {
-                const current = data[name];
+        Promise.all(
+            Object.values(USER).map(async (name) => {
+                const {
+                    data: { result },
+                } = await getAccumulateCount({ name, date });
                 const target = initialChartData.datasets.find((data) => data.label === name);
 
-                initialChartData.labels.forEach((dateLabel, index) => {
-                    let count = current?.[dateLabel] || 0;
-
-                    target.data[index] = count || 0;
-                });
-            });
-
+                target.data = result;
+            })
+        ).then(() => {
             setChartData(initialChartData);
         });
     }, [date]);

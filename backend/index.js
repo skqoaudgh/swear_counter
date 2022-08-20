@@ -1,8 +1,10 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import cors from 'cors';
+import schedule from 'node-schedule';
 
 import countRouter from './routes/count.js';
+import serCount from './services/count.js';
 
 const app = express();
 
@@ -38,4 +40,14 @@ app.use('/count', countRouter);
 
 app.listen(3000, () => {
     console.log('Listen');
+});
+
+schedule.scheduleJob('* 9 * * *', () => {
+    const users = ['유라', '명호'];
+    const date = new Date();
+    date.setHours(0);
+    date.setMinutes(0);
+    date.setSeconds(0);
+
+    Promise.all(users.map((name) => serCount.createCount(name)));
 });
