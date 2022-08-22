@@ -1,5 +1,5 @@
 export const getDateString = (dateObject) => {
-    const d = new Date(dateObject);
+    const d = dateObject ? new Date(dateObject) : new Date();
     const month = d.getMonth() + 1;
     const date = d.getDate();
     

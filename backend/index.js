@@ -45,9 +45,6 @@ app.listen(3000, () => {
 schedule.scheduleJob('* 9 * * *', () => {
     const users = ['유라', '명호'];
     const date = new Date();
-    date.setHours(0);
-    date.setMinutes(0);
-    date.setSeconds(0);
 
-    Promise.all(users.map((name) => serCount.createCount(name)));
+    Promise.all(users.map((name) => serCount.createCount(name, date)));
 });
