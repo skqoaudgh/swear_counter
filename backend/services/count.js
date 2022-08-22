@@ -16,10 +16,8 @@ export const updateCount = ({ name, date, count }) => {
 };
 
 export const getTotalCountByName = async ({ name }) => {
-    const datas = await Count.findByName({ name });
-    const totalCount = datas.reduce((acc, cur) => {
-        return acc + (cur.count || 0);
-    }, 0);
+    const data = await Count.findLastByName({ name });
+    const totalCount = data?.count || 0;
 
     return totalCount;
 };

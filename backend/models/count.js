@@ -12,7 +12,7 @@ countSchema.statics.create = function (payload) {
 };
 
 countSchema.statics.updateByName = function ({ name, date, count }) {
-    return this.findOneAndUpdate({ name, date }, { $inc: { count } }, { new: false, upsert: true });
+    return this.findOneAndUpdate({ name, date }, { $set: { count } }, { new: false, upsert: true });
 };
 
 countSchema.statics.findByName = function ({ name }) {

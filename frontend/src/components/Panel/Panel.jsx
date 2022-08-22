@@ -16,12 +16,12 @@ const Panel = ({ name }) => {
     const [count, setCount] = useState(0);
 
     const increase = () => {
+        updateCount(name, count + 1);
         setCount(count + 1);
-        updateCount(name, 1);
     };
     const decrease = () => {
+        updateCount(name, count - 1);
         setCount(count - 1);
-        updateCount(name, -1);
     };
 
     useEffect(() => {
