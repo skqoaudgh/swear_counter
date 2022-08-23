@@ -3,7 +3,9 @@ import mongoose from 'mongoose';
 import cors from 'cors';
 import schedule from 'node-schedule';
 
+import userRouter from './routes/user.js';
 import countRouter from './routes/count.js';
+import modUser from './models/user.js';
 import serCount from './services/count.js';
 
 const app = express();
@@ -36,15 +38,20 @@ mongoose
 app.use(cors(corsOptions));
 app.use(express.json());
 express.urlencoded({ extended: false });
-app.use('/count', countRouter);
+app.use('/users', userRouter);
+app.use('/counts', countRouter);
 
 app.listen(3000, () => {
     console.log('Listen');
 });
 
-schedule.scheduleJob('* 9 * * *', () => {
-    const users = ['유라', '명호'];
-    const date = new Date();
+schedule.scheduleJob('0 9 * * *', () => {
+    modUser.findAllUsers().then((result) => {
+        const users = result.map((user) => user.name);
+        const date = new Date();
+        
+        console.log(users.toString(), ' added in ', date);
 
-    Promise.all(users.map((name) => serCount.createCount(name, date)));
+        Promise.all(users.map((name) => serCount.createCount(name, date)));
+    });
 });

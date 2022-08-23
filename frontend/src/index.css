@@ -16,10 +16,6 @@
     user-select: none;
 }
 
-html,
-body {
-    overflow: hidden;
-}
 body {
     position: relative;
 }

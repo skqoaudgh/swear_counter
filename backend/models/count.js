@@ -8,6 +8,7 @@ const countSchema = new mongoose.Schema({
 
 countSchema.statics.create = function (payload) {
     const count = new this(payload);
+    
     return count.save();
 };
 

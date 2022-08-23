@@ -57,13 +57,3 @@
     font-size: 45px;
     color: rgba(200, 50, 0, 1);
 }
-
-@media (max-width: 768px) {
-    .BadButton {
-        width: 50px;
-    }
-
-    .BadButton__content {
-        width: 50px;
-    }
-}

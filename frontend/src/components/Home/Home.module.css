@@ -1,4 +1,15 @@
 .Home {
 	max-width: 600px;
     padding: 12px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin: 0 auto;
+    gap: 1rem;
+}
+
+@media (max-width: 575px) {
+   .Home {
+       	grid-template-columns: 1fr;
+        gap: 2rem;
+    }
 }

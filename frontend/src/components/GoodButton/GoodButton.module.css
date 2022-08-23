@@ -59,13 +59,3 @@
     transform: rotate(90deg);
     top: -2px;
 }
-
-@media (max-width: 768px) {
-    .GoodButton {
-        width: 50px;
-    }
-
-    .GoodButton__content {
-        width: 50px;
-    }
-}

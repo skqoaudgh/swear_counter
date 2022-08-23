@@ -31,7 +31,7 @@ const Panel = ({ name }) => {
     }, []);
 
     return (
-        <div>
+        <div className={styles.Panel}>
             <h1 className={styles.Panel__title}>{name}</h1>
             <h2>{numberWithCommas(count * COUNT_UNIT)}￦</h2>
             <div className={styles.Panel__button}>

@@ -4,6 +4,7 @@
 
 .Panel__button {
     display: flex;
+    justify-content: center;
 }
 
 .Panel__button > *:not(:last-child) {
@@ -12,6 +13,12 @@
 
 @media (max-width: 768px) {
     .Panel__title {
-       	font-size: 2.5rem;
+       	font-size: 3rem;
+    }
+}
+
+@media (max-width: 575px) {
+    .Panel:not(:first-child) {
+       	border-top: 1px solid white;
     }
 }
