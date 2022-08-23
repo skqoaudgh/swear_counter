@@ -45,7 +45,7 @@ app.listen(3000, () => {
     console.log('Listen');
 });
 
-schedule.scheduleJob('0 9 * * *', () => {
+schedule.scheduleJob('0 0 * * *', () => {
     modUser.findAllUsers().then((result) => {
         const users = result.map((user) => user.name);
         const date = new Date();
