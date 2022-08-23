@@ -18,6 +18,7 @@ import HorizontalDragContainer from '../HorizontalDragContainer';
 
 import getAccumulateCount from '../../apis/getAccumulateCount';
 import USER from '../../constants/user';
+import { injectAlphaToColor } from '../../utils/color';
 
 import styles from './Chart.module.css';
 
@@ -73,7 +74,7 @@ const options = {
     },
 };
 
-const Chart = () => {
+const Chart = ({ users }) => {
     const today = new Date();
 
     const [date, setDate] = useState(today);
@@ -93,20 +94,12 @@ const Chart = () => {
 
         const initialChartData = {
             labels,
-            datasets: [
-                {
-                    label: USER.YURA,
-                    data: Array(7).fill(0),
-                    borderColor: 'rgb(255, 99, 132)',
-                    backgroundColor: 'rgba(255, 99, 132, 0.5)',
-                },
-                {
-                    label: USER.MYUNGHO,
-                    data: Array(7).fill(0),
-                    borderColor: 'rgb(53, 162, 235)',
-                    backgroundColor: 'rgba(53, 162, 235, 0.5)',
-                },
-            ],
+            datasets: users.map((user) => ({
+                label: user.name,
+                data: Array(7).fill(0),
+                borderColor: user.color,
+                backgroundColor: injectAlphaToColor(user.color),
+            })),
         };
 
         Promise.all(
@@ -121,7 +114,7 @@ const Chart = () => {
         ).then(() => {
             setChartData(initialChartData);
         });
-    }, [date]);
+    }, [users, date]);
 
     const onClickToday = () => {
         setDate(today);

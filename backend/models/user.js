@@ -2,6 +2,7 @@ import mongoose from 'mongoose';
 
 const userSchema = new mongoose.Schema({
     name: { type: String, required: true },
+    color: { type: String, required: true },
 });
 
 userSchema.statics.create = function (payload) {
