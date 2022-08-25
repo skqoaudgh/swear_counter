@@ -17,6 +17,8 @@ import IconButton from '../IconButton';
 import HorizontalDragContainer from '../HorizontalDragContainer';
 
 import getAccumulateCount from '../../apis/getAccumulateCount';
+import getCountLog from '../../apis/getCountLog';
+
 import USER from '../../constants/user';
 import { injectAlphaToColor } from '../../utils/color';
 
@@ -45,6 +47,11 @@ const options = {
                 size: 32,
             },
             padding: 32,
+        },
+        tooltip: {
+            callbacks: {
+                title: (items) => `${items[0].label}일`
+            },
         },
     },
     scales: {
@@ -99,17 +106,36 @@ const Chart = ({ users }) => {
                 data: Array(7).fill(0),
                 borderColor: user.color,
                 backgroundColor: injectAlphaToColor(user.color),
+                pointHitRadius: 10,
             })),
         };
 
         Promise.all(
             Object.values(USER).map(async (name) => {
-                const {
-                    data: { result },
-                } = await getAccumulateCount({ name, date });
+                const [
+                    {
+                        data: { result: countData },
+                    },
+                    {
+                        data: { result: logData },
+                    },
+                ] = await Promise.all([
+                    getAccumulateCount({ name, date }),
+                    getCountLog({ name, date }),
+                ]);
                 const target = initialChartData.datasets.find((data) => data.label === name);
-
-                target.data = result;
+                target.data = countData;
+                
+                options.plugins.tooltip.callbacks.footer = (items) => {
+                    const log = logData.find((log) => {
+                        const date = log._id.date.split('-')[2];
+                        
+                        return date === items[0].label;
+                    })
+                    const string = log?.list?.map((item) => `${item.time} ${item.count}개`).join('\n') || null;
+                    
+                    return string;
+                };
             })
         ).then(() => {
             setChartData(initialChartData);

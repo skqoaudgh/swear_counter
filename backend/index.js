@@ -5,6 +5,7 @@ import schedule from 'node-schedule';
 
 import userRouter from './routes/user.js';
 import countRouter from './routes/count.js';
+import countLogRouter from './routes/countLog.js';
 import modUser from './models/user.js';
 import serCount from './services/count.js';
 
@@ -40,6 +41,7 @@ app.use(express.json());
 express.urlencoded({ extended: false });
 app.use('/users', userRouter);
 app.use('/counts', countRouter);
+app.use('/count-logs', countLogRouter);
 
 app.listen(3000, () => {
     console.log('Listen');

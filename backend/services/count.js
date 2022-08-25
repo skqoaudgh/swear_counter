@@ -1,6 +1,8 @@
 import Count from '../models/count.js';
 import { getDateString } from '../../common/utils/date.js';
 
+import serCountLog from './countLog.js';
+
 export const createCount = async (name, date) => {
     const dateString = getDateString(date);
     const data = await Count.findLastByName({ name });
@@ -9,10 +11,15 @@ export const createCount = async (name, date) => {
     return Count.create({ name, count: lastCount, date: dateString });
 };
 
-export const updateCount = ({ name, date, count }) => {
+export const updateCount = async ({ name, date, count }) => {
     const dateString = getDateString(date);
 
-    return Count.updateByName({ name, date: dateString, count });
+    await Promise.all([
+        Count.updateByName({ name, date: dateString, count }),
+        serCountLog.createCountLog({ name, date: dateString, count: count > 0 ? 1 : -1 }),
+    ]);
+
+    return true;
 };
 
 export const getTotalCountByName = async ({ name }) => {
