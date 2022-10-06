@@ -7,7 +7,8 @@
     "dev": "vite --host",
     "build": "vite build",
     "preview": "vite preview --host",
-    "deploy": "npm run build && pm2 restart all"
+    "deploy": "npm run build && pm2 restart all",
+    "deploy:init": "npm run build && pm2 start backend/index.js --name Backend && pm2 start \"npm run preview\" --name Frontend && pm2 start \"mongod\" --name MongoDB"
   },
   "dependencies": {
     "axios": "^0.27.2",
